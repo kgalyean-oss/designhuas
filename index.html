@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>The Design Haus — Floral Proposal Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -198,7 +198,7 @@ body{font-family:'Source Sans 3',sans-serif;background:#F2EEE8;color:var(--ink);
   letter-spacing:.22em;text-transform:uppercase;
   color:var(--ink-lt);
 }
-.fld input,.fld select,.fld textarea{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r);padding:14px 16px;font-family:'Source Sans 3',sans-serif;font-size:12px;font-weight:300;color:var(--ink);outline:none;transition:border-color var(--t);letter-spacing:.03em;width:100%;}.fld select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888880' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:pointer;}.fld select:focus{border-color:var(--gold);}.fld select option{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:300;color:var(--ink);background:var(--white);padding:10px;}
+.fld input,.fld select,.fld textarea{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r);padding:14px 16px;font-family:'Source Sans 3',sans-serif;font-size:16px;font-weight:300;color:var(--ink);outline:none;transition:border-color var(--t);letter-spacing:.03em;width:100%;}.fld select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888880' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:pointer;}.fld select:focus{border-color:var(--gold);}.fld select option{font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:300;color:var(--ink);background:var(--white);padding:10px;}
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--gold);}
 .fld input::placeholder,.fld textarea::placeholder{color:var(--ink-lt);opacity:.7;}
 .fld textarea{resize:vertical;min-height:80px;}
@@ -957,10 +957,10 @@ min-width:fit-content;flex-shrink:0;}
 
   /* Forms */
   .form-row{grid-template-columns:1fr;}
-  .fld input,.fld select,.fld textarea{padding:12px 14px;font-size:13px;}
+  .fld input,.fld select,.fld textarea{padding:12px 14px;font-size:16px;}
 
   /* Palette grid */
-  .pal-grid{grid-template-columns:1fr;}
+  .pal-grid{grid-template-columns:1fr 1fr;}
 
   /* Product grid */
   .prod-grid{grid-template-columns:1fr 1fr;gap:10px;padding:16px;}
@@ -1069,7 +1069,7 @@ min-width:fit-content;flex-shrink:0;}
     </div>
   </div>
 </div>
-<div class="proposal-modal-wrap" id="proposalModalWrap"><div class="proposal-modal"><div class="proposal-modal-bar"><span class="proposal-modal-bar-title">Your Proposal</span><div class="proposal-modal-bar-actions"><button class="proposal-modal-print" onclick="window.print()">Print / Save as PDF</button><button class="proposal-modal-close" onclick="closeProposalModal()">&#215;</button></div></div><div class="proposal-modal-body" id="proposalModalBody"></div></div></div>
+<div class="proposal-modal-wrap" id="proposalModalWrap"><div class="proposal-modal"><div class="proposal-modal-bar"><span class="proposal-modal-bar-title">Your Proposal</span><div class="proposal-modal-bar-actions"><button class="proposal-modal-print" onclick="printProposal()">Save as PDF</button><button class="proposal-modal-close" onclick="closeProposalModal()">&#215;</button></div></div><div class="proposal-modal-body" id="proposalModalBody"></div></div></div>
 <div class="toast" id="toastEl"></div>
 
 <script>
@@ -2266,6 +2266,17 @@ function renderDrw() {
     if (count > 0) drwCta.removeAttribute('disabled');
     else drwCta.setAttribute('disabled', true);
   }
+}
+
+
+function printProposal() {
+  var body = document.getElementById('proposalModalBody');
+  if (!body) return;
+  var win = window.open('', '_blank');
+  win.document.write(body.innerHTML);
+  win.document.close();
+  win.focus();
+  setTimeout(function(){ win.print(); }, 400);
 }
 
 function updateFooter() {
