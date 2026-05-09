@@ -1641,7 +1641,7 @@ function buildCard(p){
 }
 function toggleSec(id){S.openSecs[id]=!S.openSecs[id];renderStep3($('mainArea'));}
 function setSub(secId,subId,e){e.stopPropagation();S.activeSubs[secId]=subId;renderStep3($('mainArea'));}
-function addProd(e,id){e.stopPropagation();S.cart[id]=(S.cart[id]||0)+1;updateAll();showToast('Added to proposal');}
+function addProd(e,id){e.stopPropagation();S.cart[id]=(S.cart[id]||0)+1;updateAll();}
 function chgQty(e,id,d){
   e.stopPropagation();
   S.cart[id]=Math.max(0,(S.cart[id]||0)+d);
@@ -1782,7 +1782,7 @@ function submitAndGeneratePDF() {
     +'<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Source Sans 3,sans-serif;background:#FDFAF6;color:#1E1A17;padding:60px;max-width:800px;margin:0 auto;}@media print{body{padding:40px;}}</style>'
     +'</head><body>'
     +'<div style="text-align:center;margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid #E8E4DF;">'
-    +'<img src="'+logoSrc+'" height="36" style="display:inline-block;">'
+    +'<img src="'+logoSrc+'" height="36" style="display:inline-block;filter:brightness(0);">'
     +'</div>'
     +'<div style="display:flex;align-items:flex-start;gap:24px;margin-bottom:40px;">'
     +(p&&p.photo?'<img src="'+p.photo+'" style="width:80px;height:107px;object-fit:cover;flex-shrink:0;">':'')
